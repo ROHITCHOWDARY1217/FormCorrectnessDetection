@@ -68,7 +68,7 @@ shoulder → elbow → wrist
 
 Arm straight (angle > 150°) → “down”
 
-Arm curled (angle < 40°) → “up” → ✔ rep counted
+Arm curled (angle < 40°) → “up” →  rep counted
 
 4. Form Analysis
 
