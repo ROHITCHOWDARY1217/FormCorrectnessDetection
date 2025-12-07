@@ -23,14 +23,19 @@ def calc_angle(a, b, c):
     cos = np.dot(ba, bc) / (np.linalg.norm(ba) * np.linalg.norm(bc))
     angle = np.degrees(np.arccos(np.clip(cos, -1.0, 1.0)))
     return angle
-path = "videos/bicep_curl.mp4"
-cap = cv2.VideoCapture(0)
+path = "../videos\Man_Performing_Bicep_Curls.mp4"
+cap = cv2.VideoCapture(path)
+if not cap.isOpened():
+    print("❌ ERROR: Video not opened")
+    exit()
+else:
+    print("✅ Video loaded successfully")
 
-SHOULDER_MOVE_LIMIT = 45
+
+SHOULDER_MOVE_LIMIT = 30
 BACK_LEAN_LIMIT     = 60
 ASYMMETRY_LIMIT     = 55
 ELBOW_FLARE_LIMIT   = 70
-# speed analysis
 last_rep_time = None
 rep_speed_text = "..."
 current_fair_score = 100
@@ -55,7 +60,7 @@ with mp_pose.Pose(min_detection_confidence=0.5,
         if not ret:
             break
 
-        frame = cv2.resize(frame, (480, 720))
+        # frame = cv2.resize(frame, (480, 720))
         frame = cv2.flip(frame, 1)
         h, w, _ = frame.shape
 
