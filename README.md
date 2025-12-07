@@ -3,20 +3,20 @@ AI Workout Form Checker – Bicep Curl
 This project analyzes human exercise form using MediaPipe Pose and OpenCV.
 It detects key body joints, calculates elbow angle, counts repetitions, and gives real-time posture warnings.
 
-🎯 Features
-✔ Pose Landmarks
+ Features
+ Pose Landmarks
 
 Detects 33 human body landmarks
 
 Extracts shoulder, elbow, wrist, and hip coordinates
 
-✔ Rep Counting
+ Rep Counting
 
 Uses elbow angle to detect “up” and “down” movement
 
 Counts reps automatically
 
-✔ Real-Time Warnings
+ Real-Time Warnings
 
 Provides feedback using rule-based posture analysis:
 
@@ -28,22 +28,22 @@ Arm Asymmetry
 
 Elbow Flaring
 
-✔ Clean Visualization
+ Clean Visualization
 
 Dots only, no skeleton lines
 
 Perfect for visual demonstrations
 
-📂 Project Structure
-recorded.py     # Main program
-sampleVideo.mp4            # Test video (optional)
+ Project Structure
+recorded.py     
+sampleVideo.mp4           
 README.md
 requirements.txt
 
 🛠 Installation
 pip install -r requirements.txt
 
-▶️ How to Run
+ How to Run
 python recorded.py
 
 
@@ -53,7 +53,7 @@ Open the file → change this line:
 
 video_path = "videos/sampleVideo.mp4"
 
-🔍 How It Works
+ How It Works
 1. Pose Detection
 
 MediaPipe Pose extracts landmark coordinates every frame.
