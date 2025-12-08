@@ -25,29 +25,17 @@ def calc_angle(a, b, c):
     cos = np.dot(ba, bc) / (np.linalg.norm(ba) * np.linalg.norm(bc))
     angle = np.degrees(np.arccos(np.clip(cos, -1.0, 1.0)))
     return angle
-
-# ✅ FINAL PATH (works when script runs from project root via .bat)
-# Uses videos/ under FormCorrectnessDetection/
-path = "videos/Man_Performing_Bicep_Curls.mp4"
-
-print(f"🔍 CWD: {os.getcwd()}")
-print(f"🔍 Full path: {os.path.abspath(path)}")
-print(f"🔍 Exists: {os.path.exists(path)}")
-
-# Try FFMPEG backend first (better for MP4 on Windows)
+path = "../videos/Man_Performing_Bicep_Curls.mp4"
 cap = cv2.VideoCapture(path, cv2.CAP_FFMPEG)
 if not cap.isOpened():
-    print("⚠️ FFMPEG failed, trying default backend...")
+    print("FFMPEG failed, trying .")
     cap = cv2.VideoCapture(path)
 
 if not cap.isOpened():
-    print("❌ ERROR: Video not opened")
-    print("💡 Check that the file exists at:", os.path.abspath(path))
-    print("💡 Or try another file, e.g. videos/sampleVideo.mp4")
-    exit()
+    print(" ERROR: Video not opened")
 else:
-    print("✅ Video loaded successfully")
-    print(f"📹 FPS: {cap.get(cv2.CAP_PROP_FPS)}")
+    print(" Video loaded successfully")
+   
 
 SHOULDER_MOVE_LIMIT = 30
 BACK_LEAN_LIMIT     = 60
@@ -79,7 +67,7 @@ with mp_pose.Pose(
             print("✅ Video ended or frame not read")
             break
 
-        # frame = cv2.resize(frame, (480, 720))
+       
         frame = cv2.flip(frame, 1)
         h, w, _ = frame.shape
 
@@ -109,7 +97,6 @@ with mp_pose.Pose(
             speed_penalty = 0
             current_time = time.time()
 
-            # Rep stage logic
             if mean_angle > 150:
                 stage = "down"
 
@@ -135,20 +122,20 @@ with mp_pose.Pose(
 
                 last_rep_time = current_time
 
-            # Reference updates
+          
             frame_counter += 1
             if frame_counter % 100 == 0:
                 ref_shoulder_y = L_shoulder[1]
                 ref_hip_y = hip[1]
                 ref_elbow_x = L_elbow[0]
 
-            # Shoulder swing
+            
             if ref_shoulder_y is None:
                 ref_shoulder_y = L_shoulder[1]
             if abs(L_shoulder[1] - ref_shoulder_y) > SHOULDER_MOVE_LIMIT:
                 warning_text = "Don't swing your shoulders!"
 
-            # Back lean
+          
             if ref_hip_y is None:
                 ref_hip_y = hip[1]
             if abs(hip[1] - ref_hip_y) > BACK_LEAN_LIMIT:
@@ -219,4 +206,3 @@ with mp_pose.Pose(
 
 cap.release()
 cv2.destroyAllWindows()
-print(f"🎉 Analysis complete! Total reps: {rep_count}")
