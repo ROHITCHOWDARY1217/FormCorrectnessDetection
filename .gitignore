@@ -8,11 +8,6 @@ denv/
 __pycache__/
 *.pyc
 
-# Ignore video and heavy files
-*.mp4
-*.avi
-*.mov
-
 # Ignore OS junk
 .DS_Store
 Thumbs.db
